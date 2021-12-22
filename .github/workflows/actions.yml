@@ -24,8 +24,6 @@ jobs:
           cache: 'gradle'
       - name: fix gradlew access deniend
         run: |
-          sudo chmod +x ./gradlew && \ 
-          ./gradlew build --no-daemon && \
-          echo "Action 通过"
+          sudo chmod +x ./gradlew && ./gradlew build --no-daemon && echo "Action 通过"
         shell: bash # 默认shell
 

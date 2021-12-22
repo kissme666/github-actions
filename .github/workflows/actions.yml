@@ -18,12 +18,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
-        with:
+        with: # 给action 传参使用
           distribution: 'zulu'
           java-version: '11'
           cache: 'gradle'
       - name: fix gradlew access deniend
         run: |
-          sudo chmod +x ./gradlew && ./gradlew build --no-daemon && echo "Action 通过"
-        shell: bash # 默认shell
+          sudo chmod +x ./gradlew && ./gradlew build --no-daemon
+        shell: bash # 默认shell 可选 powershell、 python、cmd 默认为 nologin shell 具体参考官网
 

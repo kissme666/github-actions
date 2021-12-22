@@ -27,7 +27,7 @@ jobs:
           sudo chmod +x ./gradlew && ./gradlew build --no-daemon
         shell: bash # 默认shell 可选 powershell、 python、cmd 默认为 nologin shell 具体参考官网
       - name: zip artifact
-        run: tar -axvf github.action.tar.gz ./build/libs/*
+        run: tar -acvf github.action.tar.gz ./build/libs/*
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:

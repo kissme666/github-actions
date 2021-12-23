@@ -22,7 +22,7 @@ jobs:
           distribution: 'zulu'
           java-version: '11'
           cache: 'gradle'
-      - name: fix gradlew access deniend
+      - name: build project with gradle
         run: |
           sudo chmod +x ./gradlew && ./gradlew build --no-daemon
         shell: bash # 默认shell 可选 powershell、 python、cmd 默认为 nologin shell 具体参考官网
@@ -31,7 +31,8 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: my artfact
+          name: artfact
           path: github.action.tar.gz
+          retention-days: 1
 
 

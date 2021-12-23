@@ -2,7 +2,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
 # action name
-name: Java CI with Maven
+name: github action ci
 
 # 触发条件
 on:
@@ -18,10 +18,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
-        with:
+        with: # 给action 传参使用
           distribution: 'zulu'
           java-version: '11'
           cache: 'gradle'
-      - name: fix gradlew access deniend
-        run: sudo chmod +x ./gradlew
-      - run: ./gradlew build --no-daemon
+      - name: build project with gradle
+        run: |
+          sudo chmod +x ./gradlew && ./gradlew build --no-daemon
+        shell: bash # 默认shell 可选 powershell、 python、cmd 默认为 nologin shell 具体参考官网
+      - name: zip artifact
+        run: tar -acvf github.action.tar.gz ./build/libs/*
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: artfact
+          path: github.action.tar.gz
+          retention-days: 1
+
+

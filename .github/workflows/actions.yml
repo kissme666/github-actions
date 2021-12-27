@@ -35,7 +35,7 @@ jobs:
           path: github.action.tar.gz
           retention-days: 1
       - name: test secrts
-        run: echo ${{SECRETS_GITHUB_USERNAME}}
+        run: echo ${{SECRETS_GITHUB_USERNAME}} # env secrets 和 repo secrets的区别？
 #      - name: Login to GitHub Container Registry`
 #        uses: docker/login-action@v1
 #        with:

@@ -34,13 +34,16 @@ jobs:
           name: artfact
           path: github.action.tar.gz
           retention-days: 1
-      -
-        name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ SECRETS_GITHUB_USERNAME }}
-          password: ${{ SECRETS_GITHUB_PACKAGE_TOKEN }}
+      - name: test secrts
+        run: echo "${{ TEST_1 }}"
+
+#      -
+#        name: Login to GitHub Container Registry
+#        uses: docker/login-action@v1
+#        with:
+#          registry: ghcr.io
+#          username: ${{ SECRETS_GITHUB_USERNAME }}
+#          password: ${{ SECRETS_GITHUB_PACKAGE_TOKEN }}
 
 #      - name: Login to GitHub Container Registry`
 #        uses: docker/login-action@v1

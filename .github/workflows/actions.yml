@@ -35,7 +35,7 @@ jobs:
           path: github.action.tar.gz
           retention-days: 1
       - name: test secrts
-        run: echo "${{ TEST_1 }}"
+        run: echo "${{ test_1 }}"
 
 #      -
 #        name: Login to GitHub Container Registry

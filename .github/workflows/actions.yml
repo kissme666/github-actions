@@ -22,41 +22,35 @@ jobs:
           distribution: 'zulu'
           java-version: '8'
           cache: 'gradle'
+
       - name: build project with gradle
         run: |
           sudo chmod +x ./gradlew && ./gradlew build --no-daemon
         shell: bash # 默认shell 可选 powershell、 python、cmd 默认为 nologin shell 具体参考官网
+
       - name: zip artifact
         run: tar -acvf github.action.tar.gz ./build/libs/*
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: artfact
           path: github.action.tar.gz
           retention-days: 1
-      - name: test secrts
-        run: echo "${{ secrets.TEST_1 }}"
 
-#      -
-#        name: Login to GitHub Container Registry
-#        uses: docker/login-action@v1
-#        with:
-#          registry: ghcr.io
-#          username: ${{ SECRETS_GITHUB_USERNAME }}
-#          password: ${{ SECRETS_GITHUB_PACKAGE_TOKEN }}
+      - name: Login to GitHub Container Registry`
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.username }}
+          password: ${{ secrets.GHCR_TOKEN }}
 
-#      - name: Login to GitHub Container Registry`
-#        uses: docker/login-action@v1
-#        with:
-#          registry: ghcr.io
-#          username: ${{ SECRETS_GITHUB_USERNAME }}
-#          password: ${{ SECRETS_GITHUB_PACKAGE_TOKEN }}
-#      - name: Build and push # 推送镜像
-#        id: docker_build
-#        uses: docker/build-push-action@v2
-#        with:
-#          run: |
-#            cp ./build/libs/github-actions-0.0.1-SNAPSHOT.jar ./docker/app.jar
-#          context: ./docker/
-#          push: true
-#          tags: ghcr.io/${{ SECRETS_GITHUB_USERNAME }}/app:latest
+      - name: Build and push # 推送镜像
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          run: |
+            cp ./build/libs/github-actions-0.0.1-SNAPSHOT.jar ./docker/app.jar
+          context: ./docker/
+          push: true
+          tags: ghcr.io/${{ secrets.username }}/app:latest

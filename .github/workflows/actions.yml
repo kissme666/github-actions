@@ -45,8 +45,7 @@ jobs:
           username: ${{ secrets.username }}
           password: ${{ secrets.GHCR_TOKEN }}
 
-      # 推送镜像
-      - name: Build and push
+      - name: Build and push # 重新测试镜像
         id: docker_build
         uses: docker/build-push-action@v2
         with:
